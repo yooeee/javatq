@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/quenstion_title"
+                android:id="@+id/uq_quenstion_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -29,7 +29,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="18dp"
-                android:text="Q. 프레임워크와 라이브러리 차이점이 무엇인가요?">
+                android:text="Q.프레임워크와 라이브러리 차이점이 무엇인가요?">
             </TextView>
 
             <LinearLayout
@@ -38,7 +38,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/wonder"
+                    android:id="@+id/uq_wonderText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -49,7 +49,7 @@
                     ></TextView>
 
                 <TextView
-                    android:id="@+id/wondernum"
+                    android:id="@+id/uq_wondernum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -60,7 +60,7 @@
                     ></TextView>
 
                 <TextView
-                    android:id="@+id/qtdate"
+                    android:id="@+id/uq_qtdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -71,7 +71,7 @@
                     ></TextView>
 
                 <TextView
-                    android:id="@+id/qtwriter"
+                    android:id="@+id/uq_qtwriter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
