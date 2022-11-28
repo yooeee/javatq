@@ -8,7 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.JavaTQ">
+        android:theme="@style/Theme.JavaTQ"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/security_config"
+        >
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -18,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity android:name=".MainhomeActivity"></activity>-->
+        <activity android:name=".MainHomeActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
-<!--        <activity android:name=".PickfavoriteActivity"></activity>-->
-<!--        <activity android:name=".Pickfavorite2Activity"></activity>-->
+        <activity android:name=".PickfavoriteActivity"></activity>
+        <activity android:name=".Pickfavorite2Activity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

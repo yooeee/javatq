@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +16,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     private Button registerbtn;
-    private String user_id,user_nickname,user_pw,user_point,user_rating;
+    private String user_id,user_nickname,user_pw;
     private EditText edid,edpw,edname;
     private Button nextbtn;
 
@@ -27,8 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         user_id="";
         user_nickname="";
         user_pw="";
-        user_point="0";
-        user_rating="새싹";
+
 
         nextbtn = findViewById(R.id.signup_nextbtn);
         edid = findViewById(R.id.signup_signID);
@@ -39,14 +39,21 @@ public class RegisterActivity extends AppCompatActivity {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user_id=edid.getText().toString();
-                user_pw=edpw.getText().toString();
-                user_nickname=edpw.getText().toString();
-                Intent intent = new Intent(view.getContext(), PickfavoriteActivity.class);
-                intent.putExtra("ing_id",user_id);
-                intent.putExtra("ing_pw",user_pw);
-                intent.putExtra("ing_name",user_nickname);
-                startActivity(intent);
+
+                if(user_id==""||user_pw==""||user_nickname==""){
+                    user_id=edid.getText().toString();
+                    user_pw=edpw.getText().toString();
+                    user_nickname=edpw.getText().toString();
+                    Intent intent = new Intent(view.getContext(), PickfavoriteActivity.class);
+                    intent.putExtra("ing_id",user_id);
+                    intent.putExtra("ing_pw",user_pw);
+                    intent.putExtra("ing_name",user_nickname);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"정보를 입력하세요",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

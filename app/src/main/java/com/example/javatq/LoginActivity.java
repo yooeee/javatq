@@ -14,7 +14,7 @@ import com.android.volley.toolbox.Volley;
 public class LoginActivity extends AppCompatActivity {
 
     private RequestQueue queue;
-    private TextView registerbtn;
+    private TextView registerbtn,loginbtn;
 
 
     @Override
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //정의
         registerbtn = findViewById(R.id.login_signupbtn);
-        
+        loginbtn = findViewById(R.id.login_loginbutton);
 
         if(queue == null){
             queue = Volley.newRequestQueue(getApplicationContext());
@@ -36,6 +36,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //로그인 버튼 클릭시 이벤트 설정
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), MainHomeActivity.class);
                 startActivity(intent);
             }
         });

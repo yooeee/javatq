@@ -15,7 +15,7 @@ public class PickfavoriteActivity extends AppCompatActivity {
     private RequestQueue queue;
     private Button registerbtn;
 
-    private String user_id,user_nickname,user_pw,user_point,user_rating;
+
     private String ing_id,ing_pw,ing_nickname;
     private EditText edid,edpw,edname;
     private Button itbtn;
@@ -41,10 +41,10 @@ public class PickfavoriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ing_mainfv ="IT";
-                Intent intent = new Intent(view.getContext(), PickfavoriteActivity.class);
-                intent.putExtra("ing_id",user_id);
-                intent.putExtra("ing_pw",user_pw);
-                intent.putExtra("ing_name",user_nickname);
+                Intent intent = new Intent(view.getContext(), Pickfavorite2Activity.class);
+                intent.putExtra("ing_id",ing_id);
+                intent.putExtra("ing_pw",ing_pw);
+                intent.putExtra("ing_name",ing_nickname);
                 intent.putExtra("ing_mainfv",ing_mainfv);
                 startActivity(intent);
             }
