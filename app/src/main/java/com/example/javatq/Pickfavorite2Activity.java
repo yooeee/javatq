@@ -127,6 +127,8 @@ public class Pickfavorite2Activity extends AppCompatActivity {
 
     }
 
+    //놑북
+
 
 
 
