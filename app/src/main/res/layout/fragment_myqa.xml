@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <!-- 대표 색상코드 : #87CEEB-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/back"></ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:text="내 질문 및 답변들"
+                android:textColor="#87CEEB"
+                android:textSize="30dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_basic"
+                android:text="내 질문들"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold">
+
+            </Button>
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_basic"
+                android:text="내 답변들"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold">
+
+            </Button>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="420dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="20dp"
+
+            android:background="#87CEEB"
+
+            />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="450dp">
+
+        </ListView>
+
+
+    </LinearLayout>
+</FrameLayout>

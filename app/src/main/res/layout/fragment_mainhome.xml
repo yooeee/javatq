@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+<!-- 대표 색상코드 : #87CEEB-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="25dp"
+                android:text="오늘의 질문"
+                android:textAlignment="center"
+                android:textColor="#87CEEB"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+
+
+
+            <TextView
+                android:id="@+id/todayquenstion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="25dp"
+
+                android:text="Call By Value와 Call By Reference의 차이는 무엇인가요?"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/gototqanswerbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/button_basic"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="10dp"
+                    android:text="답변하기"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    ></Button>
+
+                <Button
+                    android:id="@+id/gototqaianswerbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/button_basic"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:text="정답보기"
+                    ></Button>
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="420dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="10dp"
+
+                android:background="#87CEEB"
+
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+
+                android:textStyle="bold"
+                android:textSize="27dp"
+                android:textColor="#87CEEB"
+                android:text="최근 24시간 이내에 올라온 질문들"
+                >
+            </TextView>
+
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape1"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Q. 프레임워크와 라이브러리 차이점이 무엇인가요?"
+
+                android:textStyle="bold"
+
+
+
+                >
+            </Button>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape1"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Q. 프레임워크와 라이브러리 차이점이 무엇인가요?"
+
+                android:textStyle="bold"
+
+
+                >
+            </Button>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape1"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Q. 프레임워크와 라이브러리 차이점이 무엇인가요?"
+
+                android:textStyle="bold"
+
+
+                >
+            </Button>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape1"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Q. 프레임워크와 라이브러리 차이점이 무엇인가요?"
+
+                android:textStyle="bold"
+
+
+                >
+            </Button>
+
+
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#ff0000"
+
+                android:text="13개의 질문이 당신의 답변을 기다리고 있어요."
+                >
+            </TextView>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="답변하러 가기"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/button_basic"
+                android:textStyle="bold"
+        ></Button>
+
+            <View
+                android:layout_width="420dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="10dp"
+
+                android:background="#87CEEB"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

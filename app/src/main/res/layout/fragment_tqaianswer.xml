@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+<!-- 대표 색상코드 : #87CEEB-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="25dp"
+                android:text="오늘의 질문"
+                android:textAlignment="center"
+                android:textColor="#87CEEB"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+
+
+
+            <TextView
+                android:id="@+id/todayquenstion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="25dp"
+
+                android:text="Call By Value와 Call By Reference의 차이는 무엇인가요?"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="420dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="20dp"
+
+            android:background="#87CEEB"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                android:text="내가 쓴 답"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold">
+
+            </TextView>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+
+                android:text="정확도 : 00%"
+                android:textAlignment="center"
+                android:textColor="#ff0000"
+                android:textSize="20dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="400dp"
+                android:layout_height="300dp"
+                android:hint="내가 쓴 답"
+                android:background="@drawable/shape1"
+                >
+
+            </EditText>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="420dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="20dp"
+
+            android:background="#87CEEB"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+
+                    android:text="정답"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="400dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:hint="AI의 3줄 요약"
+                android:background="@drawable/shape1"
+                >
+
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+
+                    android:text="정답 자세히보기"
+                    android:textAlignment="center"
+                    android:textColor="#ff0000"
+                    android:textSize="20dp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <Button
+                    android:id="@+id/gotousertqanswerbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+
+                    android:text="다른 유저들의 답변 보기"
+                    android:background="@drawable/button_basic"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>
