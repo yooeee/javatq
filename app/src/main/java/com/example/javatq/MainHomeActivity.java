@@ -13,19 +13,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.javatq.Request.Request_Register;
+import com.example.javatq.Request.Request_load_logingUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainHomeActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     private Button registerbtn;
+    private LoadingDialogBar loadingDialogBar;
 
     private String user_id,user_nickname,user_pw,user_point,user_rating;
-    private String ing_id,ing_pw,ing_nickname;
+    private String ing_id,ing_pw,ing_nickname,ing_point,ing_rating,ing_mainfv,ing_subfv;
     private EditText edid,edpw,edname;
     private ImageView mybtn,homebtn,comubtn;
-//    private String ing_mainfv,ing_subfv="",ing_point="0",ing_rating="새싹";
-
 
 
     @Override
@@ -33,12 +39,16 @@ public class MainHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainhome);
 
+
+
         //전 액티비티 데이터 가져오기
         Intent getintent = getIntent();
         ing_id = getintent.getStringExtra("ing_id");
         ing_pw = getintent.getStringExtra("ing_pw");
 
-
+        //로딩창 객체 생성
+        loadingDialogBar = new LoadingDialogBar(this);
+        loadingDialogBar.ShowDilaog("불러오는 중.");
 
         // 초기화
         if(queue== null){
@@ -120,6 +130,49 @@ public class MainHomeActivity extends AppCompatActivity {
         else{
             Log.d("asd","에러");
         }
+    }
+
+
+    private void load_logingUser() { // 식당 리스트 UI수정하는거
+
+
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    for (int i=0; i < jsonArray.length(); i++){
+                        try{
+                            ing_nickname= jsonObject.getString("user_nickname");
+                            ing_point= jsonObject.getString("user_point");
+                            ing_mainfv= jsonObject.getString("user_mainfv");
+                            ing_subfv= jsonObject.getString("user_subfv");
+                        }
+                        catch(JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    loadingDialogBar.HideDialog();
+                    System.out.println("가져온 데이터 :"+ing_nickname+ing_point+ing_mainfv+ing_subfv);
+
+
+
+
+
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+        }; // 서버로 Volley를 이용해서 요청을 함.
+        Request_load_logingUser requestRegister = new Request_load_logingUser(ing_id,responseListener);
+        queue = Volley.newRequestQueue(MainHomeActivity.this);
+        queue.add(requestRegister);
+
+
     }
 
 
