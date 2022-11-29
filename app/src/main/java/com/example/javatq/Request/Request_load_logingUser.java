@@ -17,11 +17,12 @@ public class Request_load_logingUser extends StringRequest {
 
     private Map<String,String> map;
 
-    public Request_load_logingUser(String id,Response.Listener<String>listener){
+    public Request_load_logingUser(String id,String pw,Response.Listener<String>listener){
         super(Method.POST,URL,listener,null);
 
         map=new HashMap<>();
         map.put("user_id",id);
+        map.put("user_pw",pw);
 
 
 

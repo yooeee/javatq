@@ -29,7 +29,8 @@ public class MainHomeActivity extends AppCompatActivity {
     private LoadingDialogBar loadingDialogBar;
 
     private String user_id,user_nickname,user_pw,user_point,user_rating;
-    private String ing_id,ing_pw,ing_nickname,ing_point,ing_rating,ing_mainfv,ing_subfv;
+    private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv;
+    private int ing_point;
     private EditText edid,edpw,edname;
     private ImageView mybtn,homebtn,comubtn;
 
@@ -54,6 +55,9 @@ public class MainHomeActivity extends AppCompatActivity {
         if(queue== null){
             queue = Volley.newRequestQueue(this);
         }
+
+        //유저 개인정보 불러오기
+        load_logingUser();
 
         mybtn = findViewById(R.id.mymenubtn);
         homebtn = findViewById(R.id.mainhomebtn);
@@ -146,16 +150,20 @@ public class MainHomeActivity extends AppCompatActivity {
                     for (int i=0; i < jsonArray.length(); i++){
                         try{
                             ing_nickname= jsonObject.getString("user_nickname");
-                            ing_point= jsonObject.getString("user_point");
+                            ing_point= jsonObject.getInt("user_point");
+                            ing_rating=jsonObject.getString("user_rating");
                             ing_mainfv= jsonObject.getString("user_mainfv");
                             ing_subfv= jsonObject.getString("user_subfv");
+                            loadingDialogBar.HideDialog();
+                            System.out.println("가져온 데이터 :"+ing_nickname+ing_point+ing_mainfv+ing_subfv+ing_rating);
+
                         }
                         catch(JSONException e){
                             e.printStackTrace();
                         }
                     }
                     loadingDialogBar.HideDialog();
-                    System.out.println("가져온 데이터 :"+ing_nickname+ing_point+ing_mainfv+ing_subfv);
+                    System.out.println("가져온 데이터 :"+ing_nickname+ing_point+ing_mainfv+ing_subfv+ing_rating);
 
 
 
@@ -168,7 +176,7 @@ public class MainHomeActivity extends AppCompatActivity {
 
             }
         }; // 서버로 Volley를 이용해서 요청을 함.
-        Request_load_logingUser requestRegister = new Request_load_logingUser(ing_id,responseListener);
+        Request_load_logingUser requestRegister = new Request_load_logingUser(ing_id,ing_pw,responseListener);
         queue = Volley.newRequestQueue(MainHomeActivity.this);
         queue.add(requestRegister);
 
