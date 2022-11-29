@@ -30,7 +30,7 @@ public class MainHomeActivity extends AppCompatActivity {
 
     private String user_id,user_nickname,user_pw,user_point,user_rating;
     private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv;
-    private int ing_point;
+    private int  ing_point;
     private EditText edid,edpw,edname;
     private ImageView mybtn,homebtn,comubtn;
 
@@ -143,27 +143,33 @@ public class MainHomeActivity extends AppCompatActivity {
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String data) {
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject jsonObject = new JSONObject(data);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     for (int i=0; i < jsonArray.length(); i++){
+
                         try{
+                            jsonObject = jsonArray.getJSONObject(i);
                             ing_nickname= jsonObject.getString("user_nickname");
-                            ing_point= jsonObject.getInt("user_point");
-                            ing_rating=jsonObject.getString("user_rating");
+                            ing_rating= jsonObject.getString("user_rating");
                             ing_mainfv= jsonObject.getString("user_mainfv");
                             ing_subfv= jsonObject.getString("user_subfv");
-                            loadingDialogBar.HideDialog();
-                            System.out.println("가져온 데이터 :"+ing_nickname+ing_point+ing_mainfv+ing_subfv+ing_rating);
+                            ing_point= jsonObject.getInt("user_point");
 
-                        }
-                        catch(JSONException e){
+//
+//
+                            System.out.println("가져온 데이터 :"+ing_nickname+ing_rating+ing_mainfv+ing_subfv);
+                            loadingDialogBar.HideDialog();
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+
                     }
-                    loadingDialogBar.HideDialog();
-                    System.out.println("가져온 데이터 :"+ing_nickname+ing_point+ing_mainfv+ing_subfv+ing_rating);
+                    System.out.println("가져온 데이터2 :"+ing_subfv);
+
+
 
 
 
@@ -172,6 +178,7 @@ public class MainHomeActivity extends AppCompatActivity {
                 }
                 catch (JSONException e){
                     e.printStackTrace();
+                    loadingDialogBar.HideDialog();
                 }
 
             }

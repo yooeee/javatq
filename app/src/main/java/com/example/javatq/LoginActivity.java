@@ -40,8 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         edid = findViewById(R.id.login_editID);
         edpw = findViewById(R.id.login_editpw);
 
-        id = edid.getText().toString();
-        pw = edid.getText().toString();
+
 
 
 
@@ -63,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                id = edid.getText().toString();
+                pw = edpw.getText().toString();
                 login_user();
 
             }
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
-                    if(success){
+                    if(success == true){
 
                         Toast.makeText(getApplicationContext(),"유저 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);

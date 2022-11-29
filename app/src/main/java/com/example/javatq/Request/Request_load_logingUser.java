@@ -26,7 +26,7 @@ public class Request_load_logingUser extends StringRequest {
 
 
 
-        Log.v("작동하냐여기","리퀘스트");
+        System.out.println("리케스트:"+id+pw);
 
 
     }
