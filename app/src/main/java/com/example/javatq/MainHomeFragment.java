@@ -21,11 +21,29 @@ public class MainHomeFragment extends Fragment {
 
     private View view;
     private Button btn_frag2;
+    private String tt1,tt2,tt3,tt4;
+    Button btn1,btn2,btn3,btn4;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mainhome, container, false);
+
+        tt1 = this.getArguments().getString("tt1");
+        tt2 = this.getArguments().getString("tt2");
+        tt3 = this.getArguments().getString("tt3");
+        tt4 = this.getArguments().getString("tt4");
+
+        btn1 = view.findViewById(R.id.tt1);
+        btn2 = view.findViewById(R.id.tt2);
+        btn3 = view.findViewById(R.id.tt3);
+        btn4 = view.findViewById(R.id.tt4);
+
+        btn1.setText(tt1);
+        btn2.setText(tt2);
+        btn3.setText(tt3);
+        btn4.setText(tt4);
 
 //        btn_frag2 = view.findViewById(R.id.btn_frag2);
         //fragment에서는 그냥 findViewById로 Button id를 가져올 수 없음.

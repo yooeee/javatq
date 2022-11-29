@@ -123,6 +123,7 @@
 
 
             <Button
+                android:id="@+id/tt1"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:background="@drawable/shape1"
@@ -139,6 +140,7 @@
             </Button>
 
             <Button
+                android:id="@+id/tt2"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:background="@drawable/shape1"
@@ -154,6 +156,7 @@
             </Button>
 
             <Button
+                android:id="@+id/tt3"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:background="@drawable/shape1"
@@ -169,6 +172,7 @@
             </Button>
 
             <Button
+                android:id="@+id/tt4"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:background="@drawable/shape1"
