@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 public class MainHomeActivity extends AppCompatActivity {
 
-    private RequestQueue queue;
+    private RequestQueue queue,queue2;
     private Button registerbtn;
     private LoadingDialogBar loadingDialogBar;
     private String tt1,tt2,tt3,tt4;
@@ -50,6 +50,14 @@ public class MainHomeActivity extends AppCompatActivity {
         Intent getintent = getIntent();
         ing_id = getintent.getStringExtra("ing_id");
         ing_pw = getintent.getStringExtra("ing_pw");
+        ing_nickname = getintent.getStringExtra("ing_nickname");
+        ing_rating = getintent.getStringExtra("ing_rating");
+        ing_point = getintent.getIntExtra("ing_point",0);
+        ing_mainfv = getintent.getStringExtra("ing_mainfv");
+        ing_subfv = getintent.getStringExtra("ing_subfv");
+
+        System.out.println(ing_id+ing_pw+ing_mainfv+ing_subfv);
+
 
         //로딩창 객체 생성
         loadingDialogBar = new LoadingDialogBar(this);
@@ -57,32 +65,20 @@ public class MainHomeActivity extends AppCompatActivity {
 
         // 초기화
         if(queue== null){
-            queue = Volley.newRequestQueue(this);
+            queue = Volley.newRequestQueue(getApplicationContext());
         }
 
-        //유저 개인정보 불러오기
-        load_logingUser();
-        //홈 글 불러오기
 
+        //홈 글 불러오기
+        if(queue2== null){
+            queue2 = Volley.newRequestQueue(getApplicationContext());
+        }
         load_home_tqlist();
 
         mybtn = findViewById(R.id.mymenubtn);
         homebtn = findViewById(R.id.mainhomebtn);
         comubtn =findViewById(R.id.quenstionbtn);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        // 프래그먼트매니저를 통해 사용 (초기 프래그먼트 설정)
-        Bundle bd = new Bundle();
-        bd.putString("tt1",tt1);
-        bd.putString("tt2",tt2);
-        bd.putString("tt3",tt3);
-        bd.putString("tt4",tt4);
-
-        MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
-        mainhomefragment.setArguments(bd);
-        transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
-        transaction.addToBackStack(null);
-        transaction.commit(); //commit으로 저장 하지 않으면 화면 전환이 되지 않음
 
 
 
@@ -164,58 +160,7 @@ public class MainHomeActivity extends AppCompatActivity {
     }
 
 
-    private void load_logingUser() { // 식당 리스트 UI수정하는거
 
-
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String data) {
-                try {
-                    JSONObject jsonObject = new JSONObject(data);
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    for (int i=0; i < jsonArray.length(); i++){
-
-                        try{
-                            jsonObject = jsonArray.getJSONObject(i);
-                            ing_nickname= jsonObject.getString("user_nickname");
-                            ing_rating= jsonObject.getString("user_rating");
-                            ing_mainfv= jsonObject.getString("user_mainfv");
-                            ing_subfv= jsonObject.getString("user_subfv");
-                            ing_point= jsonObject.getInt("user_point");
-
-//
-//
-                            System.out.println("가져온 데이터 :"+ing_nickname+ing_rating+ing_mainfv+ing_subfv);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                    System.out.println("가져온 데이터2 :"+ing_subfv);
-
-
-
-
-
-
-
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-
-                }
-
-            }
-        }; // 서버로 Volley를 이용해서 요청을 함.
-        Request_load_logingUser requestRegister = new Request_load_logingUser(ing_id,ing_pw,responseListener);
-        queue = Volley.newRequestQueue(MainHomeActivity.this);
-        queue.add(requestRegister);
-
-
-    }
 
     private void load_home_tqlist() { // 식당 리스트 UI수정하는거
 
@@ -226,6 +171,7 @@ public class MainHomeActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    Log.d("가져온거",data);
                     int length = jsonArray.length();
                     for (int i=0; i < 4; i++){
 
@@ -241,10 +187,11 @@ public class MainHomeActivity extends AppCompatActivity {
                                 break;
                                 case 3 : tt4=uq_qt;
                                 break;
+
                             }
 
 
-                            loadingDialogBar.HideDialog();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
 
@@ -257,6 +204,27 @@ public class MainHomeActivity extends AppCompatActivity {
                     System.out.println("tt2="+tt2);
                     System.out.println("tt3="+tt3);
                     System.out.println("tt4="+tt4);
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    // 프래그먼트매니저를 통해 사용 (초기 프래그먼트 설정)
+                    Bundle bd = new Bundle();
+                    bd.putString("tt1",tt1);
+                    bd.putString("tt2",tt2);
+                    bd.putString("tt3",tt3);
+                    bd.putString("tt4",tt4);
+                    bd.putInt("length",length);
+
+                    System.out.println("tt1가져왔나?"+tt1);
+
+
+                    MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
+                    mainhomefragment.setArguments(bd);
+                    transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
+                    transaction.addToBackStack(null);
+                    transaction.commit(); //commit으로 저장 하지 않으면 화면 전환이 되지 않음
+
+
+                    loadingDialogBar.HideDialog();
 
 
 
@@ -271,8 +239,8 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         }; // 서버로 Volley를 이용해서 요청을 함.
         Request_load_hometq requestRegister = new Request_load_hometq(ing_subfv,responseListener);
-        queue = Volley.newRequestQueue(this);
-        queue.add(requestRegister);
+        queue2 = Volley.newRequestQueue(this);
+        queue2.add(requestRegister);
 
 
     }

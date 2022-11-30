@@ -23,6 +23,7 @@ public class MainHomeFragment extends Fragment {
     private Button btn_frag2;
     private String tt1,tt2,tt3,tt4;
     Button btn1,btn2,btn3,btn4;
+    private TextView redtv;
 
 
     @Nullable
@@ -34,16 +35,21 @@ public class MainHomeFragment extends Fragment {
         tt2 = this.getArguments().getString("tt2");
         tt3 = this.getArguments().getString("tt3");
         tt4 = this.getArguments().getString("tt4");
+        int length = this.getArguments().getInt("length");
+
+        System.out.println("tt1가져왔어요 프래그먼트>>?"+tt1);
 
         btn1 = view.findViewById(R.id.tt1);
         btn2 = view.findViewById(R.id.tt2);
         btn3 = view.findViewById(R.id.tt3);
         btn4 = view.findViewById(R.id.tt4);
+        redtv=view.findViewById(R.id.redtext);
 
         btn1.setText(tt1);
         btn2.setText(tt2);
         btn3.setText(tt3);
         btn4.setText(tt4);
+        redtv.setText(length+"개의 질문이 당신의 답변을 기다리고 있어요.");
 
 //        btn_frag2 = view.findViewById(R.id.btn_frag2);
         //fragment에서는 그냥 findViewById로 Button id를 가져올 수 없음.

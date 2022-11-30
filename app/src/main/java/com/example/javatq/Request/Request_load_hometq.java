@@ -15,7 +15,7 @@ public class Request_load_hometq extends StringRequest {
 
     private Map<String,String> map;
 
-    public Request_load_hometq(String id,  Response.Listener<String>listener){
+    public Request_load_hometq(String id,  Response.Listener<String>listener) {
         super(Method.POST,URL,listener,null);
 
         map=new HashMap<>();
@@ -31,7 +31,7 @@ public class Request_load_hometq extends StringRequest {
     }
 
     @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
+    protected Map<String, String> getParams()  {
         return map;
     }
 }

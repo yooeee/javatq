@@ -88,20 +88,42 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if(success == true){
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        String ing_nickname = null;
+                        String ing_rating= null;
+                        String ing_mainfv= null;
+                        String ing_subfv= null;
+                        int ing_point= 0;
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            try{
+                                jsonObject = jsonArray.getJSONObject(i);
+                                ing_nickname = jsonObject.getString("user_nickname");
+                                ing_rating = jsonObject.getString("user_rating");
+                                ing_point = jsonObject.getInt("user_point");
+                                ing_mainfv = jsonObject.getString("user_mainfv");
+                                ing_subfv = jsonObject.getString("user_subfv");
+
+
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
+
+
 
                         Toast.makeText(getApplicationContext(),"유저 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);
                         intent.putExtra("ing_id", id);
                         intent.putExtra("ing_pw", pw);
+                        intent.putExtra("ing_nickname", ing_nickname);
+                        intent.putExtra("ing_rating", ing_rating);
+                        intent.putExtra("ing_point", ing_point);
+                        intent.putExtra("ing_mainfv", ing_mainfv);
+                        intent.putExtra("ing_subfv", ing_subfv);
+
 
                         startActivity(intent);
                     }
-                    else{
-                        Toast.makeText(getApplicationContext(),"유저 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                    }
-
 
 
 
@@ -113,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         }; // 서버로 Volley를 이용해서 요청을 함.
-        Request_loging_user requestRegister = new Request_loging_user(id,pw,responseListener);
+        Request_load_logingUser requestRegister = new Request_load_logingUser(id,pw,responseListener);
         queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(requestRegister);
 
