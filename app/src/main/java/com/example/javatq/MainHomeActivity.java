@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,9 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.javatq.Request.Request_Register;
-import com.example.javatq.Request.Request_load_hometq;
-import com.example.javatq.Request.Request_load_logingUser;
+import com.example.javatq.Request.Request_load_hometqlist;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,9 +56,9 @@ public class MainHomeActivity extends AppCompatActivity {
         System.out.println(ing_id+ing_pw+ing_mainfv+ing_subfv);
 
 
-        //로딩창 객체 생성
-        loadingDialogBar = new LoadingDialogBar(this);
-        loadingDialogBar.ShowDilaog("불러오는 중.");
+//        //로딩창 객체 생성
+//        loadingDialogBar = new LoadingDialogBar(this);
+//        loadingDialogBar.ShowDilaog("불러오는 중.");
 
         // 초기화
         if(queue== null){
@@ -73,7 +70,17 @@ public class MainHomeActivity extends AppCompatActivity {
         if(queue2== null){
             queue2 = Volley.newRequestQueue(getApplicationContext());
         }
-        load_home_tqlist();
+//        load_home_tqlist();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        // 프래그먼트매니저를 통해 사용 (초기 프래그먼트 설정)
+        MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_subfv",ing_subfv);
+        mainhomefragment.setArguments(bundle);
+        transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
+        transaction.addToBackStack(null);
+        transaction.commit(); //commit으로 저장 하지 않으면 화면 전환이 되지 않음
+//        loadingDialogBar.HideDialog();
 
         mybtn = findViewById(R.id.mymenubtn);
         homebtn = findViewById(R.id.mainhomebtn);
@@ -103,7 +110,11 @@ public class MainHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 // 프래그먼트매니저를 통해 사용 (초기 프래그먼트 설정)
+
                 MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
+                Bundle bundle = new Bundle();
+                bundle.putString("ing_subfv",ing_subfv);
+                mainhomefragment.setArguments(bundle);
                 transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
                 transaction.addToBackStack(null);
                 transaction.commit(); //commit으로 저장 하지 않으면 화면 전환이 되지 않음
@@ -162,7 +173,7 @@ public class MainHomeActivity extends AppCompatActivity {
 
 
 
-    private void load_home_tqlist() { // 식당 리스트 UI수정하는거
+    private void load_home_tqlist() {
 
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -238,7 +249,7 @@ public class MainHomeActivity extends AppCompatActivity {
 
             }
         }; // 서버로 Volley를 이용해서 요청을 함.
-        Request_load_hometq requestRegister = new Request_load_hometq(ing_subfv,responseListener);
+        Request_load_hometqlist requestRegister = new Request_load_hometqlist(ing_subfv,responseListener);
         queue2 = Volley.newRequestQueue(this);
         queue2.add(requestRegister);
 
