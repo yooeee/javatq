@@ -1,27 +1,27 @@
 package com.example.javatq.Item;
 
 public class uqItem {
-    String title,wonderText,wonderInt,date,writter,qaid;
+    String title,wonderText,wonderInt,date,writter, uqid;
 
 
 
 
-    public uqItem(String qaid,String title,String wonderText,String wonderInt,String date,String writter){
+    public uqItem(String uqid, String title, String wonderText, String wonderInt, String date, String writter){
         this.title = title;
         this.wonderInt =wonderInt;
         this.wonderText = wonderText;
         this.date=date;
         this.writter=writter;
-        this.qaid=qaid;
+        this.uqid = uqid;
 
     }
 
-    public String getQaid() {
-        return qaid;
+    public String getUqid() {
+        return uqid;
     }
 
-    public void setQaid(String qaid) {
-        this.qaid = qaid;
+    public void setUqid(String uqid) {
+        this.uqid = uqid;
     }
 
     public String getTitle() {
