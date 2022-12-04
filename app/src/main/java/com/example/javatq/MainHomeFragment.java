@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -89,6 +91,8 @@ public class MainHomeFragment extends Fragment {
         return view;
     }
 
+
+
     private void load_tq() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -123,6 +127,8 @@ public class MainHomeFragment extends Fragment {
         queue.add(requestRegister);
 
     }
+
+
 
     private void load_home_tqlist() {
 

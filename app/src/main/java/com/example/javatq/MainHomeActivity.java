@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.RequestQueue;
@@ -156,8 +158,8 @@ public class MainHomeActivity extends AppCompatActivity {
     }//
 
 
-    void changeFragment(String index){
-        if(index=="1"){
+    void changeFragment(int index){
+        if(index==1){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             // 프래그먼트매니저를 통해 사용 (초기 프래그먼트 설정)
             MyqaFragment fragment= new MyqaFragment(); // 객체 생성
@@ -168,6 +170,24 @@ public class MainHomeActivity extends AppCompatActivity {
         else{
             Log.d("asd","에러");
         }
+    }
+
+    public void replaceFragmentComm(Fragment fragment,String loging_id,String uq_id) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_id",loging_id);
+        bundle.putString("uq_id",uq_id);
+        System.out.println("rfcomm 작동 로그인아이디"+ing_id);
+
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
     }
 
 

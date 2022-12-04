@@ -1,5 +1,6 @@
 package com.example.javatq;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,34 +11,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class MyHomeFragment extends Fragment {
+public class viewTQFragment extends Fragment {
 
-    public static MyqaFragment newInstance() {
-        return new MyqaFragment();
+    public static viewTQFragment newInstance(String dataid,String datauqid) {
+        return new viewTQFragment();
     }
 
-    private View view;
-    private Button myqabtn,mygiftbtn,pickfv,transpointbtn;
-    private MainHomeActivity mActivity;
 
+
+    private View view;
+    private Button btn_frag2;
+    private String ing_id,ing_uq_id;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_myhome, container, false);
+        view = inflater.inflate(R.layout.fragment_viewquenstion, container, false);
+        //전  데이터 가져오기
 
-        myqabtn = view.findViewById(R.id.myqabtn);
-//        mygiftbtn = view.findViewById(R.id.mygiftbtn);
-//        pickfv = view.findViewById(R.id.myfavor_re_btn);
-//        transpointbtn = view.findViewById(R.id.mytopointbtn);
+        ing_id = getArguments().getString("ing_id");
+        ing_uq_id = getArguments().getString("uq_id");
 
-        //클릭이벤트
-        myqabtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainHomeActivity)getActivity()).replaceFragment(MyHomeFragment.newInstance());
-            }
-        });
+        System.out.println(ing_id+ing_uq_id);
+
 
 
 

@@ -81,6 +81,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/viewtq_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
@@ -102,6 +103,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/viewtq_quenstion"
                     android:layout_width="400dp"
                     android:layout_height="300dp"
                     android:layout_marginLeft="10dp"
@@ -157,6 +159,19 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/viewTQ_changeTQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="수정하기"
+                    android:background="@drawable/button_basic"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    ></Button>
+
                 <View
                     android:layout_width="420dp"
                     android:layout_height="3dp"
@@ -195,6 +210,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/viewtq_writetqa"
                         android:layout_width="400dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
@@ -205,7 +221,7 @@
                     </EditText>
 
                     <Button
-                        android:id="@+id/loginbutton"
+                        android:id="@+id/viewtq_writetqabtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -219,6 +235,7 @@
                         />
 
                     <ListView
+                        android:id="@+id/viewtq_tqalist"
                         android:layout_width="match_parent"
                         android:layout_height="500dp">
 

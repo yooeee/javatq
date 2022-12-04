@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.javatq.Adapter.uqAdapter;
 import com.example.javatq.Item.uqItem;
+import com.example.javatq.Listener.uqListener;
 import com.example.javatq.Request.Request_load_comm_uqlist;
 import com.example.javatq.Request.Request_load_logingUser;
 
@@ -31,6 +32,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CommFragment extends Fragment {
+
+    public static viewTQFragment newInstance() {
+        return new viewTQFragment();
+    }
 
     private View view;
     private Button btn_frag2;
@@ -68,6 +73,18 @@ public class CommFragment extends Fragment {
         rv.setAdapter(adpt);
         rv.setLayoutManager(manager);
 
+        // ============어댑터 클릭리스너 구현 ===========
+        adpt.setRes_list_item(uq_items);
+        adpt.setListClickListener(new uqListener() {
+            @Override
+            public void onListClick(uqAdapter.ViewHolder holder, View view, int position) {
+                uqItem item = adpt.getItem(position);
+                System.out.println("이거 아이템 아이디는?"+item.getUqid());
+                ((MainHomeActivity)getActivity()).replaceFragmentComm(CommFragment.newInstance(),ing_id,item.getUqid());
+
+            }
+        });
+
 
 
         return view;
@@ -75,12 +92,6 @@ public class CommFragment extends Fragment {
 
     private void load_uqlist(String code) { // 게시글 가져오기(최신순으로)
         Response.Listener<String> responseListener = new Response.Listener<String>() {
-            String maxtitle;
-            String maxwonder;
-            int max_cur = 0;
-            String maxdate;
-            String maxnickname;
-            String maxid;
 
             @Override
             public void onResponse(String data) {
@@ -104,15 +115,7 @@ public class CommFragment extends Fragment {
                             adpt.notifyDataSetChanged();
                             adpt.setRes_list_item(uq_items);
 
-                            if(Integer.parseInt(uq_cur) >max_cur){
-                                max_cur = Integer.parseInt(uq_cur);
-                                maxtitle = uq_qt;
-                                maxid=uq_id;
-                                maxwonder="나도 궁금해요 :";
-                                maxdate = uq_date;
-                                maxnickname=uq_nickname;
 
-                            }
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -125,23 +128,6 @@ public class CommFragment extends Fragment {
                     e.printStackTrace();
                 }
                 
-                // 따봉많은거 가져오기
-                TextView uq_titletv,uq_wondertv,uq_wondernumtv,uq_datetv,uq_nicknametv;
-                uq_titletv = view.findViewById(R.id.uq_toptitle);
-                uq_wondertv= view.findViewById(R.id.uq_topwonder);
-                uq_wondernumtv = view.findViewById(R.id.uq_topnum);
-                uq_datetv = view.findViewById(R.id.uq_topdate);
-                uq_nicknametv = view.findViewById(R.id.uq_topname);
-                System.out.println("체크"+maxid+maxnickname+maxtitle);
-                uq_titletv.setText(maxtitle);
-                uq_wondertv.setText(maxwonder);
-                uq_wondernumtv.setText(String.valueOf(max_cur));
-                uq_datetv.setText(maxdate);
-                uq_nicknametv.setText(maxnickname);
-
-
-
-
 
                 loadingDialogBar.HideDialog();
 
