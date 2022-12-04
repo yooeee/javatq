@@ -81,7 +81,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/viewtq_title"
+                    android:id="@+id/viewuq_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
@@ -103,7 +103,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/viewtq_quenstion"
+                    android:id="@+id/viewuq_quenstion"
                     android:layout_width="400dp"
                     android:layout_height="300dp"
                     android:layout_marginLeft="10dp"
@@ -121,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/viewuq_tqnickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
@@ -132,6 +133,7 @@
 
                     </TextView>
                     <TextView
+                        android:id="@+id/viewuq_uqrating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
@@ -143,6 +145,7 @@
 
                     </TextView>
                     <TextView
+                        android:id="@+id/viewuq_uqdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
@@ -160,7 +163,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/viewTQ_changeTQ"
+                    android:id="@+id/viewuq_changeuq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -210,7 +213,7 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/viewtq_writetqa"
+                        android:id="@+id/viewuq_writeuqa"
                         android:layout_width="400dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"

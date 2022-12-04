@@ -181,6 +181,7 @@ public class MainHomeActivity extends AppCompatActivity {
         System.out.println("rfcomm 작동 로그인아이디"+ing_id);
 
         fragment.setArguments(bundle);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
     }
 

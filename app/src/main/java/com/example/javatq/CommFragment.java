@@ -1,14 +1,11 @@
 package com.example.javatq;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +30,8 @@ import java.util.ArrayList;
 
 public class CommFragment extends Fragment {
 
-    public static viewTQFragment newInstance() {
-        return new viewTQFragment();
+    public static viewUQFragment newInstance() {
+        return new viewUQFragment();
     }
 
     private View view;
@@ -42,8 +39,9 @@ public class CommFragment extends Fragment {
     private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv;
     private String uq_id,uq_qt,uq_cur,uq_nickname,uq_date;
     private int  ing_point;
-    private RequestQueue queue;
+
     private Button registerbtn;
+    private RequestQueue queue;
     private LoadingDialogBar loadingDialogBar;
     private RecyclerView rv;
     private uqAdapter adpt;
