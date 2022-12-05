@@ -53,6 +53,7 @@ public class CommFragment extends Fragment {
 
         ing_id = this.getArguments().getString("ing_id");
         ing_pw = this.getArguments().getString("ing_pw");
+        ing_nickname = this.getArguments().getString("ing_nickname");
 
         //로딩창 객체 생성
         loadingDialogBar=new LoadingDialogBar(getContext());
@@ -82,7 +83,8 @@ public class CommFragment extends Fragment {
             public void onListClick(uqAdapter.ViewHolder holder, View view, int position) {
                 uqItem item = adpt.getItem(position);
                 System.out.println("이거 아이템 아이디는?"+item.getUqid());
-                ((MainHomeActivity)getActivity()).replaceFragmentComm(CommFragment.newInstance(),ing_id,item.getUqid());
+                ((MainHomeActivity)getActivity()).replaceFragmentComm(CommFragment.newInstance(),ing_id,item.getUqid(),ing_nickname,ing_rating);
+            System.out.println("여기는 잉닉네임을 보냇는지 확인좀해보자!!"+ing_nickname);
 
             }
         });

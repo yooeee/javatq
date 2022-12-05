@@ -172,13 +172,15 @@ public class MainHomeActivity extends AppCompatActivity {
         }
     }
 
-    public void replaceFragmentComm(Fragment fragment,String loging_id,String uq_id) {
+    public void replaceFragmentComm(Fragment fragment, String loging_id, String uq_id,String loging_nickname,String loging_rating) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putString("ing_id",loging_id);
         bundle.putString("uq_id",uq_id);
-        System.out.println("rfcomm 작동 로그인아이디"+ing_id);
+        bundle.putString("ing_nickname",loging_nickname);
+        bundle.putString("ing_rating",loging_rating);
+        System.out.println("rfcomm 작동 로그인아이디"+ this.ing_id);
 
         fragment.setArguments(bundle);
         fragmentTransaction.addToBackStack(null);

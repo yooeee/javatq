@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ import com.example.javatq.Item.uqaItem;
 import com.example.javatq.Listener.uqListener;
 import com.example.javatq.Listener.uqaListener;
 import com.example.javatq.Request.Request_delete_uqa;
+import com.example.javatq.Request.Request_input_uqa;
 import com.example.javatq.Request.Request_load_uqainfo;
 import com.example.javatq.Request.Request_load_uqinfo;
 
@@ -35,11 +37,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class viewUQFragment extends Fragment {
 
-    public static viewUQFragment newInstance(String dataid, String datauqid) {
+    public static viewUQFragment newInstance(String dataid, String datauqid,String datanickname,String datarating) {
         return new viewUQFragment();
     }
 
@@ -58,9 +62,13 @@ public class viewUQFragment extends Fragment {
     private uqaAdapter adpt;
     private ArrayList<uqaItem> uqa_items;
     private String checkmy;
+    private EditText uqa_writetextet;
+    private String getDate,getTime;
 
     private TextView uq_title_tv,uq_nickname_tv,uq_rating_tv,uq_date_tv;
     private TextView uq_quenstion_tv;
+    private Button uqa_writebtn;
+    private String uqa_getText,ing_DateTime;
 
     @Nullable
     @Override
@@ -70,6 +78,9 @@ public class viewUQFragment extends Fragment {
 
         ing_id = getArguments().getString("ing_id");
         ing_uq_id = getArguments().getString("uq_id");
+        ing_nickname = getArguments().getString("ing_nickname");
+        ing_rating = getArguments().getString("ing_rating");
+        System.out.println("내 등급 가져와지나"+ing_rating);
 
 
         // 뷰 초기화
@@ -82,6 +93,10 @@ public class viewUQFragment extends Fragment {
         deletebtn = view.findViewById(R.id.viewuq_deleteuq);
         revisebtn.setVisibility(View.GONE);
         deletebtn.setVisibility(View.GONE);
+        uqa_writebtn = view.findViewById(R.id.viewtq_writetqabtn);
+        uqa_writetextet = view.findViewById(R.id.viewuq_writeuqa);
+
+
 
 
 
@@ -127,7 +142,7 @@ public class viewUQFragment extends Fragment {
 
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
                 dlg.setTitle("[시스템]"); //제목
-                dlg.setMessage("삭제하시겠습니까?"); // 메시지
+                dlg.setMessage("답변을 삭제하시겠습니까?"); // 메시지
                 dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -153,6 +168,53 @@ public class viewUQFragment extends Fragment {
             }
         });
 
+        uqa_writebtn.setOnClickListener(new View.OnClickListener() { // 등록하기누르면 등록
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
+                dlg.setTitle("[시스템]"); //제목
+                dlg.setMessage("답변을 등록하시겠습니까?"); // 메시지
+                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(),"등록이 취소되었습니다..",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        uqa_getText = uqa_writetextet.getText().toString();
+
+
+                        if(uqa_getText.equals("")){
+                            Toast.makeText(getContext(),"답변을 작성하세요.",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            long now = System.currentTimeMillis();
+                            Date date = new Date(now);
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat asd = new SimpleDateFormat("hh:mm:ss");
+                            getDate = sdf.format(date);
+                            getTime = asd.format(date);
+                            ing_DateTime = "["+getDate+"] "+"["+getTime+"]";
+                            System.out.println("날짜는 :"+getDate);
+                            System.out.println("시간은 :"+getTime);
+
+                            input_uqa();
+                        }
+
+                    }
+
+
+                });
+
+
+                dlg.show();
+
+            }
+        });
 
 
 
@@ -172,6 +234,42 @@ public class viewUQFragment extends Fragment {
 
         return view;
     }
+
+    private void input_uqa() {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String data) {
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (success) { // 등록에 성공한 경우
+                        Toast.makeText(getContext(),"답변 등록 성공하였습니다.",Toast.LENGTH_SHORT).show();
+
+                    } else { // 등록에 실패한 경우
+                        Toast.makeText(getContext(),"답변 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                uqa_items.add(new uqaItem(uqa_id,ing_nickname,ing_rating,ing_DateTime,uqa_getText,"1"));
+                System.out.println(uqa_items);
+                adpt.notifyDataSetChanged();
+                adpt.setRes_list_item(uqa_items);
+
+
+            }
+        }; // 서버로 Volley를 이용해서 요청을 함.
+        Request_input_uqa requestRegister = new Request_input_uqa(ing_id,ing_uq_id,
+                ing_nickname,ing_rating,uqa_getText,getDate,getTime,responseListener);
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        queue.add(requestRegister);
+
+    }
+
 
     private void deleteUqa(String delete_uqa_id,int delete_position) {
 
