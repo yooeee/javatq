@@ -41,7 +41,7 @@ public class CommFragment extends Fragment {
     private int  ing_point;
 
     private Button registerbtn;
-    private RequestQueue queue;
+    private RequestQueue queue, queue2;
     private LoadingDialogBar loadingDialogBar;
     private RecyclerView rv;
     private uqAdapter adpt;
@@ -57,6 +57,10 @@ public class CommFragment extends Fragment {
         //로딩창 객체 생성
         loadingDialogBar=new LoadingDialogBar(getContext());
         loadingDialogBar.ShowDilaog("불러오는 중.");
+        if(queue== null){
+            queue = Volley.newRequestQueue(getContext());
+        }
+
         load_userdb();
         //load_uqlist("1"); // 따봉수 가장높은거 가져오기(1번)
 //        load_uqlist("2");// 모든글 (2번)

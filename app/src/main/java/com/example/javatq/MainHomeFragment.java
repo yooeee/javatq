@@ -67,6 +67,10 @@ public class MainHomeFragment extends Fragment {
         //로딩창 객체 생성
         loadingDialogBar = new LoadingDialogBar(getContext());
         loadingDialogBar.ShowDilaog("불러오는 중.");
+        if(queue== null){
+            queue = Volley.newRequestQueue(getContext());
+        }
+
         load_tq();
         load_home_tqlist();
 
