@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +36,10 @@ public class CommFragment extends Fragment {
         return new viewUQFragment();
     }
 
+    public static writeUQFragment newInstance2() {
+        return new writeUQFragment();
+    }
+
     private View view;
     private Button btn_frag2;
     private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv;
@@ -46,6 +52,7 @@ public class CommFragment extends Fragment {
     private RecyclerView rv;
     private uqAdapter adpt;
     private ArrayList<uqItem> uq_items;
+    private ImageView createTQbtn;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +61,24 @@ public class CommFragment extends Fragment {
         ing_id = this.getArguments().getString("ing_id");
         ing_pw = this.getArguments().getString("ing_pw");
         ing_nickname = this.getArguments().getString("ing_nickname");
+        ing_rating = this.getArguments().getString("ing_rating");
+        ing_subfv = this.getArguments().getString("ing_subfv");
 
+        createTQbtn = view.findViewById(R.id.comm_createbtn);
+        createTQbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //bundle.putString("ing_id",ing_id);
+                //                bundle.putString("ing_pw",ing_pw);
+                //                bundle.putString("ing_nickname",ing_nickname);
+                //                bundle.putString("ing_rating",ing_rating);
+                //                bundle.putInt("ing_point",ing_point);
+                //                bundle.putString("ing_mainfv",ing_mainfv);
+                //                bundle.putString("ing_subfv",ing_subfv);
+                ((MainHomeActivity)getActivity()).replaceFragmentWriteUQ(CommFragment.newInstance2(),ing_id,ing_nickname,ing_rating,ing_subfv
+                ,ing_mainfv,ing_point,ing_pw);
+            }
+        });
         //로딩창 객체 생성
         loadingDialogBar=new LoadingDialogBar(getContext());
         loadingDialogBar.ShowDilaog("불러오는 중.");

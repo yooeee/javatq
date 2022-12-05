@@ -194,6 +194,27 @@ public class MainHomeActivity extends AppCompatActivity {
     }
 
 
+    public void replaceFragmentWriteUQ(Fragment fragment, String loging_id, String loging_nickname, String loging_rating, String loging_subfv,
+                                       String loging_mainfv,int loging_point,String loging_pw) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_id",loging_id);
+        System.out.println("크리에이트버튼누르기전 ing_id"+loging_id);
+        bundle.putString("ing_nickname",loging_nickname);
+        bundle.putString("ing_rating",loging_rating);
+        bundle.putString("ing_subfv",loging_subfv);
+        bundle.putString("ing_mainfv",loging_mainfv);
+        bundle.putString("ing_point",String.valueOf(loging_point));
+        bundle.putString("ing_pw",loging_pw);
+        fragment.setArguments(bundle);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
+    }
+
+
+
+
 
 
     private void load_home_tqlist() {
@@ -278,15 +299,6 @@ public class MainHomeActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 

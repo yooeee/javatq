@@ -87,6 +87,7 @@
             </TextView>
             
             <EditText
+                android:id="@+id/writeuq_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="17"
@@ -109,11 +110,11 @@
             android:gravity="center">
 
             <EditText
+                android:id="@+id/writeuq_quenstion"
                 android:layout_width="400dp"
                 android:layout_height="300dp"
-                android:hint="질문 내용을 입력하세요."
                 android:background="@drawable/shape1"
-                >
+                android:hint="질문 내용을 입력하세요.">
 
             </EditText>
 
@@ -124,26 +125,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/photo"
-                android:layout_gravity="center"></ImageView>
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/plus"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"></ImageView>
-
-
-        </LinearLayout>
+            android:gravity="center"/>
 
         <Button
-            android:id="@+id/usertqbtn"
+            android:id="@+id/writeuq_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -57,18 +57,14 @@
             </Spinner>
 
 
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"></EditText>
-
             <ImageView
+                android:id="@+id/comm_createbtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/search"
+                android:src="@drawable/plus"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="100dp"
                 >
 
             </ImageView>
