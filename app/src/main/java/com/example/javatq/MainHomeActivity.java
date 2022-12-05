@@ -172,7 +172,9 @@ public class MainHomeActivity extends AppCompatActivity {
         }
     }
 
-    public void replaceFragmentComm(Fragment fragment, String loging_id, String uq_id,String loging_nickname,String loging_rating) {
+    public void replaceFragmentViewUQ(Fragment fragment, String loging_id,
+                                      String uq_id, String loging_nickname, String loging_rating,
+                                      String loging_subfv, String loging_pw) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundle = new Bundle();
@@ -180,6 +182,26 @@ public class MainHomeActivity extends AppCompatActivity {
         bundle.putString("uq_id",uq_id);
         bundle.putString("ing_nickname",loging_nickname);
         bundle.putString("ing_rating",loging_rating);
+        bundle.putString("ing_subfv",loging_subfv);
+        bundle.putString("ing_pw",loging_pw);
+        System.out.println("rfcomm 작동 로그인아이디"+ this.ing_id);
+
+        fragment.setArguments(bundle);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
+    }
+
+    public void replaceFragmentComm(Fragment fragment, String loging_id,
+                                      String loging_nickname, String loging_rating,
+                                      String loging_subfv, String loging_pw) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_id",loging_id);
+        bundle.putString("ing_nickname",loging_nickname);
+        bundle.putString("ing_rating",loging_rating);
+        bundle.putString("ing_subfv",loging_subfv);
+        bundle.putString("ing_pw",loging_pw);
         System.out.println("rfcomm 작동 로그인아이디"+ this.ing_id);
 
         fragment.setArguments(bundle);

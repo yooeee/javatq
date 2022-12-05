@@ -28,6 +28,7 @@ import com.example.javatq.Item.uqItem;
 import com.example.javatq.Item.uqaItem;
 import com.example.javatq.Listener.uqListener;
 import com.example.javatq.Listener.uqaListener;
+import com.example.javatq.Request.Request_delete_uq;
 import com.example.javatq.Request.Request_delete_uqa;
 import com.example.javatq.Request.Request_input_uqa;
 import com.example.javatq.Request.Request_load_uqainfo;
@@ -43,8 +44,8 @@ import java.util.Date;
 
 public class viewUQFragment extends Fragment {
 
-    public static viewUQFragment newInstance(String dataid, String datauqid,String datanickname,String datarating) {
-        return new viewUQFragment();
+    public static CommFragment newInstance() {
+        return new CommFragment();
     }
 
 
@@ -57,7 +58,7 @@ public class viewUQFragment extends Fragment {
     private String ing_uq_id;
     private RequestQueue queue,queue2;
     private LoadingDialogBar loadingDialogBar;
-    Button revisebtn,deletebtn,uqarevisebtn,uqadeletebtn;
+    Button deletebtn,uqarevisebtn,uqadeletebtn;
     private RecyclerView rv;
     private uqaAdapter adpt;
     private ArrayList<uqaItem> uqa_items;
@@ -80,6 +81,10 @@ public class viewUQFragment extends Fragment {
         ing_uq_id = getArguments().getString("uq_id");
         ing_nickname = getArguments().getString("ing_nickname");
         ing_rating = getArguments().getString("ing_rating");
+        ing_rating = this.getArguments().getString("ing_rating");
+        ing_subfv = this.getArguments().getString("ing_subfv");
+        ing_pw = this.getArguments().getString("ing_pw");
+
         System.out.println("내 등급 가져와지나"+ing_rating);
 
 
@@ -89,9 +94,7 @@ public class viewUQFragment extends Fragment {
         uq_rating_tv = view.findViewById(R.id.viewuq_uqrating);
         uq_date_tv = view.findViewById(R.id.viewuq_uqdate);
         uq_quenstion_tv = view.findViewById(R.id.viewuq_quenstion);
-        revisebtn = view.findViewById(R.id.viewuq_changeuq);
         deletebtn = view.findViewById(R.id.viewuq_deleteuq);
-        revisebtn.setVisibility(View.GONE);
         deletebtn.setVisibility(View.GONE);
         uqa_writebtn = view.findViewById(R.id.viewtq_writetqabtn);
         uqa_writetextet = view.findViewById(R.id.viewuq_writeuqa);
@@ -168,6 +171,39 @@ public class viewUQFragment extends Fragment {
             }
         });
 
+        deletebtn.setOnClickListener(new View.OnClickListener() { // 글삭제
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
+                dlg.setTitle("[시스템]"); //제목
+                dlg.setMessage("질문을 삭제하시겠습니까?"); // 메시지
+                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext()," 취소되었습니다..",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        deleteUa();
+
+
+
+
+                    }
+
+
+                });
+
+
+                dlg.show();
+
+            }
+        });
+
         uqa_writebtn.setOnClickListener(new View.OnClickListener() { // 등록하기누르면 등록
             @Override
             public void onClick(View view) {
@@ -233,6 +269,39 @@ public class viewUQFragment extends Fragment {
 //        });
 
         return view;
+    }
+
+    private void deleteUa() {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String data) {
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (success) { // 등록에 성공한 경우
+                        Toast.makeText(getContext(),"삭제 성공하였습니다.",Toast.LENGTH_SHORT).show();
+
+                    } else { // 등록에 실패한 경우
+                        Toast.makeText(getContext(),"삭제 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                ((MainHomeActivity)getActivity()).replaceFragmentComm(viewUQFragment.newInstance(),ing_id,ing_nickname,ing_rating
+                        ,ing_subfv,ing_pw);
+
+
+
+            }
+        }; // 서버로 Volley를 이용해서 요청을 함.
+        Request_delete_uq requestRegister = new Request_delete_uq(ing_uq_id,responseListener);
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        queue.add(requestRegister);
+
     }
 
     private void input_uqa() {
@@ -405,6 +474,7 @@ public class viewUQFragment extends Fragment {
                     e.printStackTrace();
                 }
                 uq_title_tv.setText(uq_qt);
+                System.out.println("왜 uq_q가 널이야"+uq_q);
                 uq_quenstion_tv.setText(uq_q);
                 uq_nickname_tv.setText("작성자: "+uq_nickname);
                 uq_rating_tv.setText("등급 : "+uq_rating);
@@ -412,7 +482,6 @@ public class viewUQFragment extends Fragment {
                 if(writter_id.equals(ing_id)) // 본인글일경우 수정하기 활성화 아니면 비활성화
                 {
                     System.out.println("equals작동"+writter_id+ing_id);
-                    revisebtn.setVisibility(View.VISIBLE);
                     deletebtn.setVisibility(View.VISIBLE);
 
                 }

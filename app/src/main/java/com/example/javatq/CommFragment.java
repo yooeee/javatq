@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,10 +58,10 @@ public class CommFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_community, container, false);
 
         ing_id = this.getArguments().getString("ing_id");
-        ing_pw = this.getArguments().getString("ing_pw");
         ing_nickname = this.getArguments().getString("ing_nickname");
         ing_rating = this.getArguments().getString("ing_rating");
         ing_subfv = this.getArguments().getString("ing_subfv");
+        ing_pw = this.getArguments().getString("ing_pw");
 
         createTQbtn = view.findViewById(R.id.comm_createbtn);
         createTQbtn.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +106,8 @@ public class CommFragment extends Fragment {
             public void onListClick(uqAdapter.ViewHolder holder, View view, int position) {
                 uqItem item = adpt.getItem(position);
                 System.out.println("이거 아이템 아이디는?"+item.getUqid());
-                ((MainHomeActivity)getActivity()).replaceFragmentComm(CommFragment.newInstance(),ing_id,item.getUqid(),ing_nickname,ing_rating);
+                ((MainHomeActivity)getActivity()).replaceFragmentViewUQ(CommFragment.newInstance(),ing_id,item.getUqid(),ing_nickname,ing_rating
+                ,ing_subfv,ing_pw);
             System.out.println("여기는 잉닉네임을 보냇는지 확인좀해보자!!"+ing_nickname);
 
             }
