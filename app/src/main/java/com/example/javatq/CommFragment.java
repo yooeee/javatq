@@ -63,6 +63,7 @@ public class CommFragment extends Fragment {
         ing_subfv = this.getArguments().getString("ing_subfv");
         ing_pw = this.getArguments().getString("ing_pw");
 
+
         createTQbtn = view.findViewById(R.id.comm_createbtn);
         createTQbtn.setOnClickListener(new View.OnClickListener() {
             @Override

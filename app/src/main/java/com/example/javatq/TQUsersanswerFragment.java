@@ -13,27 +13,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.javatq.Adapter.tqaAdapter;
 import com.example.javatq.Adapter.uqAdapter;
+import com.example.javatq.Item.tqaItem;
 import com.example.javatq.Item.uqItem;
-import com.example.javatq.Request.Request_load_hometq;
 import com.example.javatq.Request.Request_load_tq;
+import com.example.javatq.Request.Request_load_tqa;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class TQAaianswerFragment extends Fragment {
-
-
+public class TQUsersanswerFragment extends Fragment {
 
     public static TQUsersanswerFragment newInstance() {
         return new TQUsersanswerFragment();
@@ -49,8 +48,8 @@ public class TQAaianswerFragment extends Fragment {
     private RequestQueue queue, queue2;
     private LoadingDialogBar loadingDialogBar;
     private RecyclerView rv;
-    private uqAdapter adpt;
-    private ArrayList<uqItem> uq_items;
+    private tqaAdapter adpt;
+    private ArrayList<tqaItem> tqa_items;
     private ImageView createTQbtn;
 
     private Button btn;
@@ -67,16 +66,11 @@ public class TQAaianswerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_tqaianswer, container, false);
+        view = inflater.inflate(R.layout.fragment_tquseranswers, container, false);
+
 
         ing_tq_id = this.getArguments().getString("ing_tq_id");
-        ing_tqa_answer = this.getArguments().getString("ing_tqa_answer");
-
-        tq_titletv = view.findViewById(R.id.aianswer_title);
-        myanswer_et = view.findViewById(R.id.aianswer_myanswer);
-        aianswer_et = view.findViewById(R.id.aianswer_aianswer);
-        btn = view.findViewById(R.id.aianswer_anotheranswerbtn);
-
+        ing_tq_title = this.getArguments().getString("ing_tq_title");
 
         //로딩창 객체 생성
         loadingDialogBar=new LoadingDialogBar(getContext());
@@ -85,21 +79,17 @@ public class TQAaianswerFragment extends Fragment {
             queue = Volley.newRequestQueue(getContext());
         }
 
-        load_tq();
+        tqa_items = new ArrayList<>(); // 게시글 담을곳
+        //어댑터 세팅
+        adpt = new tqaAdapter();
+        //레이아웃 방식 지정
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv = view.findViewById(R.id.tquseranswer_list);
+        rv.setAdapter(adpt);
+        rv.setLayoutManager(manager);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ((MainHomeActivity)getActivity()).replaceFragmentTQUserAnswer(TQAaianswerFragment.newInstance(),ing_tq_id,tq_title);
-            }
-        });
-
-
-
-
-        System.out.println("잉티뷰아이디"+ing_tq_id);
-
+        load_tqa();
 
 
 
@@ -120,7 +110,8 @@ public class TQAaianswerFragment extends Fragment {
         return view;
     }
 
-    private void load_tq() {
+    private void load_tqa() {
+
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String data) {
@@ -128,14 +119,20 @@ public class TQAaianswerFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(data);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.d("가져온거",data);
-                    for (int i=0; i < 4; i++){
+                    for (int i=0; i < jsonArray.length(); i++){
 
                         try{
                             jsonObject = jsonArray.getJSONObject(i);
-                            tq_title = jsonObject.getString("tq_quenstion");
-                            ai_answer = jsonObject.getString("tq_answer");
-                            ing_tq_id = jsonObject.getString("tq_id");
-                            System.out.println("서버에서 tq_id가져왓나"+ing_tq_id);
+
+                            String getName = jsonObject.getString("user_nickname");
+                            String getRating = jsonObject.getString("user_rating");
+                            String getDate = jsonObject.getString("tqa_date");
+                            String getAnswer = jsonObject.getString("tqa_answer");
+
+                            tqa_items.add(new tqaItem(getName,getRating,getDate,"0",getAnswer));
+                            adpt.notifyDataSetChanged();
+                            adpt.setRes_list_item(tqa_items);
+
 
 
                         }
@@ -151,20 +148,16 @@ public class TQAaianswerFragment extends Fragment {
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                tq_titletv.setText(tq_title);
-                aianswer_et.setText(ai_answer);
-                myanswer_et.setText(ing_tqa_answer);
+
                 loadingDialogBar.HideDialog();
 
 
 
             }
         }; // 서버로 Volley를 이용해서 요청을 함.
-        Request_load_tq requestRegister = new Request_load_tq(ing_tq_id,responseListener);
+        Request_load_tqa requestRegister = new Request_load_tqa(ing_tq_id,responseListener);
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(requestRegister);
 
     }
-
-
 }

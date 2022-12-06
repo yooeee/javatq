@@ -43,13 +43,13 @@
 
 
             <TextView
-                android:id="@+id/todayquenstion"
+                android:id="@+id/aianswer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="25dp"
 
-                android:text="Call By Value와 Call By Reference의 차이는 무엇인가요?"
+                android:text="의 차이는 무엇인가요?"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="25dp"
@@ -112,6 +112,8 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/aianswer_myanswer"
+                android:focusableInTouchMode="false"
                 android:layout_width="400dp"
                 android:layout_height="300dp"
                 android:hint="내가 쓴 답"
@@ -166,6 +168,8 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/aianswer_aianswer"
+                android:focusableInTouchMode="false"
                 android:layout_width="400dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="10dp"
@@ -198,7 +202,7 @@
                 </TextView>
 
                 <Button
-                    android:id="@+id/gotousertqanswerbtn"
+                    android:id="@+id/aianswer_anotheranswerbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

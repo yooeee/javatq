@@ -77,9 +77,14 @@ public class MainHomeActivity extends AppCompatActivity {
         // 프래그먼트매니저를 통해 사용 (초기 프래그먼트 설정)
         MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
         Bundle bundle = new Bundle();
-        bundle.putString("ing_subfv",ing_subfv);
+
+        bundle.putString("ing_id",ing_id);
+        bundle.putString("ing_pw",ing_pw);
         bundle.putString("ing_nickname",ing_nickname);
         bundle.putString("ing_rating",ing_rating);
+        bundle.putInt("ing_point",ing_point);
+        bundle.putString("ing_mainfv",ing_mainfv);
+        bundle.putString("ing_subfv",ing_subfv);
         mainhomefragment.setArguments(bundle);
         transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
         transaction.addToBackStack(null);
@@ -102,6 +107,15 @@ public class MainHomeActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 // 프래그먼트매니저를 통해 사용
                 MyHomeFragment fragment= new MyHomeFragment(); // 객체 생성
+                Bundle bundle = new Bundle();
+                bundle.putString("ing_id",ing_id);
+                bundle.putString("ing_pw",ing_pw);
+                bundle.putString("ing_nickname",ing_nickname);
+                bundle.putString("ing_rating",ing_rating);
+                bundle.putInt("ing_point",ing_point);
+                bundle.putString("ing_mainfv",ing_mainfv);
+                bundle.putString("ing_subfv",ing_subfv);
+
                 transaction.replace(R.id.mainhome_fragment, fragment); //layout, 교체될 layout
                 transaction.addToBackStack(null);
                 transaction.commit(); //commit으로 저장 하지 않으면 화면 전환이 되지 않음
@@ -117,7 +131,14 @@ public class MainHomeActivity extends AppCompatActivity {
 
                 MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
                 Bundle bundle = new Bundle();
+                bundle.putString("ing_id",ing_id);
+                bundle.putString("ing_pw",ing_pw);
+                bundle.putString("ing_nickname",ing_nickname);
+                bundle.putString("ing_rating",ing_rating);
+                bundle.putInt("ing_point",ing_point);
+                bundle.putString("ing_mainfv",ing_mainfv);
                 bundle.putString("ing_subfv",ing_subfv);
+
                 mainhomefragment.setArguments(bundle);
                 transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
                 transaction.addToBackStack(null);
@@ -250,11 +271,24 @@ public class MainHomeActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
     }
 
-    public void replaceFragmentTQAAianswer(Fragment fragment, String loging_tq_id) {
+    public void replaceFragmentTQAAianswer(Fragment fragment, String loging_tq_id,String loging_tqa_answer) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putString("ing_tq_id",loging_tq_id);
+        bundle.putString("ing_tqa_answer",loging_tqa_answer);
+
+
+        fragment.setArguments(bundle);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
+    }
+    public void replaceFragmentTQUserAnswer(Fragment fragment, String loging_tq_id,String loging_tq_title) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_tq_id",loging_tq_id);
+        bundle.putString("ing_tqa_answer",loging_tq_title);
 
 
         fragment.setArguments(bundle);

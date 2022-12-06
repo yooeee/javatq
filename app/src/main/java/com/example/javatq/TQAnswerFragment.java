@@ -133,7 +133,7 @@ public class TQAnswerFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                ((MainHomeActivity)getActivity()).replaceFragmentTQAAianswer(TQAnswerFragment.newInstance(),ing_tq_id);
+                ((MainHomeActivity)getActivity()).replaceFragmentTQAAianswer(TQAnswerFragment.newInstance(),ing_tq_id,tqa_answer);
 
 
 

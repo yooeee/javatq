@@ -55,8 +55,12 @@ public class MainHomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_mainhome, container, false);
 
 
+
+        ing_id = this.getArguments().getString("ing_id");
         ing_nickname = this.getArguments().getString("ing_nickname");
         ing_rating = this.getArguments().getString("ing_rating");
+        ing_subfv = this.getArguments().getString("ing_subfv");
+        ing_pw = this.getArguments().getString("ing_pw");
 
 
         //현재 날짜 가져오기
