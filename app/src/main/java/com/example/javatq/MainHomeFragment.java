@@ -40,9 +40,15 @@ public class MainHomeFragment extends Fragment {
     private String uq_qt,getTime,tq_title;
     private LoadingDialogBar loadingDialogBar;
 
+    private Button gotoaianswerbtn;
+
     public static TQAnswerFragment newInstanceTQA() {
         return new TQAnswerFragment();
     }
+    public static TQAaianswerFragment newInstanceTQA2() {
+        return new TQAaianswerFragment();
+    }
+
 
     @Nullable
     @Override
@@ -61,6 +67,8 @@ public class MainHomeFragment extends Fragment {
         ing_rating = this.getArguments().getString("ing_rating");
         ing_subfv = this.getArguments().getString("ing_subfv");
         ing_pw = this.getArguments().getString("ing_pw");
+
+        gotoaianswerbtn = view.findViewById(R.id.gototqaianswerbtn);
 
 
         //현재 날짜 가져오기
@@ -104,6 +112,14 @@ public class MainHomeFragment extends Fragment {
                         ,tq_title,ing_nickname,ing_rating);
             }
         });
+
+        gotoaianswerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainHomeActivity)getActivity()).replaceFragmentTQAAianswer(MainHomeFragment.newInstanceTQA2(),ing_tq_id,"정답을 작성하지 않으셨습니다.");
+            }
+        });
+
 
 
 //        btn_frag2 = view.findViewById(R.id.btn_frag2);

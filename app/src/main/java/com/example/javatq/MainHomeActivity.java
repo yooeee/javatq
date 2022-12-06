@@ -115,6 +115,7 @@ public class MainHomeActivity extends AppCompatActivity {
                 bundle.putInt("ing_point",ing_point);
                 bundle.putString("ing_mainfv",ing_mainfv);
                 bundle.putString("ing_subfv",ing_subfv);
+                fragment.setArguments(bundle);
 
                 transaction.replace(R.id.mainhome_fragment, fragment); //layout, 교체될 layout
                 transaction.addToBackStack(null);

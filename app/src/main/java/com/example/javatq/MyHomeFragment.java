@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +20,30 @@ public class MyHomeFragment extends Fragment {
     private View view;
     private Button myqabtn,mygiftbtn,pickfv,transpointbtn;
     private MainHomeActivity mActivity;
+    private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv,ing_tq_id;
+    private TextView tv_nickname,tv_main,tv_rating;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_myhome, container, false);
+
+        ing_id = this.getArguments().getString("ing_id");
+        ing_nickname = this.getArguments().getString("ing_nickname");
+        ing_rating = this.getArguments().getString("ing_rating");
+        ing_subfv = this.getArguments().getString("ing_subfv");
+        ing_mainfv = this.getArguments().getString("ing_mainfv");
+        ing_pw = this.getArguments().getString("ing_pw");
+
+        tv_nickname = view.findViewById(R.id.tv_usernickname);
+        tv_main = view.findViewById(R.id.tv_userfavorite);
+        tv_rating = view.findViewById(R.id.tv_userrating);
+
+        tv_nickname.setText(ing_nickname);
+        tv_main.setText("["+ing_mainfv+"]"+" - ["+ing_subfv+"]");
+        tv_rating.setText("등급: "+ing_rating);
+
 
         myqabtn = view.findViewById(R.id.myqabtn);
 //        mygiftbtn = view.findViewById(R.id.mygiftbtn);
