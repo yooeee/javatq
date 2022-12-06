@@ -30,22 +30,34 @@ import java.util.Date;
 public class MainHomeFragment extends Fragment {
 
     private View view;
-    private Button btn_frag2;
+    private Button btn_frag,tq_answerbtn,tq_viewanswerbtn;
     private String tt1,tt2,tt3,tt4;
     Button btn1,btn2,btn3,btn4;
     private TextView redtv,tq_titletv;
     private RequestQueue queue;
     private String user_id,user_nickname,user_pw,user_point,user_rating;
-    private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv;
+    private String ing_id,ing_pw,ing_nickname,ing_rating,ing_mainfv,ing_subfv,ing_tq_id;
     private String uq_qt,getTime,tq_title;
     private LoadingDialogBar loadingDialogBar;
 
-
+    public static TQAnswerFragment newInstanceTQA() {
+        return new TQAnswerFragment();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+
+
+
         view = inflater.inflate(R.layout.fragment_mainhome, container, false);
+
+
+        ing_nickname = this.getArguments().getString("ing_nickname");
+        ing_rating = this.getArguments().getString("ing_rating");
+
 
         //현재 날짜 가져오기
         long now = System.currentTimeMillis();
@@ -62,6 +74,8 @@ public class MainHomeFragment extends Fragment {
         btn3 = view.findViewById(R.id.tt3);
         btn4 = view.findViewById(R.id.tt4);
         redtv=view.findViewById(R.id.redtext);
+        tq_answerbtn = view.findViewById(R.id.gototqanswerbtn);
+        tq_viewanswerbtn = view.findViewById(R.id.gototqaianswerbtn);
         tq_titletv=view.findViewById(R.id.home_todayquenstion);
 
         //로딩창 객체 생성
@@ -78,6 +92,15 @@ public class MainHomeFragment extends Fragment {
         btn2.setText(tt2);
         btn3.setText(tt3);
         btn4.setText(tt4);
+
+        tq_answerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainHomeActivity)getActivity()).replaceFragmentTQAnswer(MainHomeFragment.newInstanceTQA(),ing_tq_id
+                        ,tq_title,ing_nickname,ing_rating);
+            }
+        });
+
 
 //        btn_frag2 = view.findViewById(R.id.btn_frag2);
         //fragment에서는 그냥 findViewById로 Button id를 가져올 수 없음.
@@ -110,6 +133,9 @@ public class MainHomeFragment extends Fragment {
                         try{
                             jsonObject = jsonArray.getJSONObject(i);
                             tq_title = jsonObject.getString("tq_quenstion");
+                            ing_tq_id = jsonObject.getString("tq_id");
+                            System.out.println("서버에서 tq_id가져왓나"+ing_tq_id);
+
 
                         }
                         catch (JSONException e) {
@@ -123,6 +149,8 @@ public class MainHomeFragment extends Fragment {
                 catch (JSONException e){
                     e.printStackTrace();
                 }
+
+
 
             }
         }; // 서버로 Volley를 이용해서 요청을 함.

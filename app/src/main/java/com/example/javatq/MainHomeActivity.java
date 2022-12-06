@@ -78,6 +78,8 @@ public class MainHomeActivity extends AppCompatActivity {
         MainHomeFragment mainhomefragment= new MainHomeFragment(); // 객체 생성
         Bundle bundle = new Bundle();
         bundle.putString("ing_subfv",ing_subfv);
+        bundle.putString("ing_nickname",ing_nickname);
+        bundle.putString("ing_rating",ing_rating);
         mainhomefragment.setArguments(bundle);
         transaction.replace(R.id.mainhome_fragment, mainhomefragment); //layout, 교체될 layout
         transaction.addToBackStack(null);
@@ -233,6 +235,35 @@ public class MainHomeActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
     }
+
+    public void replaceFragmentTQAnswer(Fragment fragment, String loging_tq_id,String loging_tq_title,String loging_nickname, String loging_rating) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_tq_id",loging_tq_id);
+        bundle.putString("ing_tq_title",loging_tq_title);
+        bundle.putString("ing_nickname",loging_nickname);
+        bundle.putString("ing_rating",loging_rating);
+
+        fragment.setArguments(bundle);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
+    }
+
+    public void replaceFragmentTQAAianswer(Fragment fragment, String loging_tq_id) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("ing_tq_id",loging_tq_id);
+
+
+        fragment.setArguments(bundle);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.mainhome_fragment, fragment).commit();      // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.
+    }
+
+
+
 
 
 
